@@ -9,12 +9,18 @@ import BO.CategoriaBO;
 import DAO.CategoriaDAO;
 import com.sun.rowset.CachedRowSetImpl;
 import java.awt.Component;
+import java.awt.event.ItemEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -22,6 +28,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class frmCategorias extends javax.swing.JFrame {
 
+    private TableRowSorter trsFiltro;
     DefaultTableModel modeloCategorias;
     
     /**
@@ -30,6 +37,8 @@ public class frmCategorias extends javax.swing.JFrame {
     public frmCategorias() {
         this.bindGrid();
         initComponents();
+        this.cbxFiltroCat.insertItemAt("Seleccionar", 0);
+        this.cbxFiltroCat.setSelectedIndex(0);
         this.txtNombreCategoria.requestFocus();
         this.setLocationRelativeTo(null);
         this.setTitle("Gestión de Categorías");
@@ -62,6 +71,10 @@ public class frmCategorias extends javax.swing.JFrame {
         btnAgregar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        lblFiltroCat = new javax.swing.JLabel();
+        cbxFiltroCat = new JComboBox(getColumnas());
+        txtFiltroCat = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -199,6 +212,47 @@ public class frmCategorias extends javax.swing.JFrame {
                 .addGap(16, 16, 16))
         );
 
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Filtrar", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
+
+        lblFiltroCat.setText("Buscar por:");
+
+        cbxFiltroCat.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxFiltroCatItemStateChanged(evt);
+            }
+        });
+
+        txtFiltroCat.setEnabled(false);
+        txtFiltroCat.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtFiltroCatKeyTyped(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(lblFiltroCat)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cbxFiltroCat, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtFiltroCat, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblFiltroCat)
+                    .addComponent(cbxFiltroCat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFiltroCat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -207,22 +261,27 @@ public class frmCategorias extends javax.swing.JFrame {
             .addComponent(jScrollPane1)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(gbxDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(gbxAcciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(gbxDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(gbxAcciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(gbxDatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(gbxAcciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -277,8 +336,8 @@ public class frmCategorias extends javax.swing.JFrame {
         int row = this.dgCategorias.getSelectedRow();
         
         String[] datos = new String[2];
-        datos[0] = this.dgCategorias.getModel().getValueAt(row, 0).toString();
-        datos[1] = this.dgCategorias.getModel().getValueAt(row, 1).toString();
+        datos[0] = this.dgCategorias.getValueAt(row, 0).toString();
+        datos[1] = this.dgCategorias.getValueAt(row, 1).toString();
         
         this.LlenarDatos(datos);
         
@@ -288,12 +347,44 @@ public class frmCategorias extends javax.swing.JFrame {
         this.btnEliminar.setEnabled(true);
     }//GEN-LAST:event_dgCategoriasMouseClicked
 
+    private void cbxFiltroCatItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxFiltroCatItemStateChanged
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            this.txtFiltroCat.setText("");
+
+            if (evt.getItem() != "Seleccionar") {
+                this.txtFiltroCat.setEnabled(true);
+                this.txtFiltroCat.requestFocus();
+            } else {
+                this.cbxFiltroCat.setSelectedIndex(0);
+                this.txtFiltroCat.setEnabled(false);
+                this.dgCategorias.setRowSorter(null);
+            }
+        }
+    }//GEN-LAST:event_cbxFiltroCatItemStateChanged
+
+    private void txtFiltroCatKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltroCatKeyTyped
+        txtFiltroCat.addKeyListener(new KeyAdapter() {
+            public void keyReleased(final KeyEvent e) {
+                String cadena = (txtFiltroCat.getText());
+                txtFiltroCat.setText(cadena);
+                repaint();
+                Filtrar();
+            }
+        });
+
+        trsFiltro = new TableRowSorter(this.dgCategorias.getModel());
+        this.dgCategorias.setRowSorter(trsFiltro);
+    }//GEN-LAST:event_txtFiltroCatKeyTyped
+
     private void Nuevo(){
         this.txtIDCategoria.setText("");
         this.txtNombreCategoria.setText("");
         
         this.bindGrid();
         this.dgCategorias.setModel(modeloCategorias);
+        this.cbxFiltroCat.setSelectedIndex(0);
+        this.txtFiltroCat.setEnabled(false);
+        this.dgCategorias.setRowSorter(null);
         
         this.btnAgregar.setEnabled(true);
         this.btnModificar.setEnabled(false);
@@ -314,6 +405,7 @@ public class frmCategorias extends javax.swing.JFrame {
             
             this.bindGrid();
             this.dgCategorias.setModel(modeloCategorias);
+            this.dgCategorias.setRowSorter(null);
         }
         else{
             JOptionPane.showMessageDialog(null, "Ocurrió un error inesperado.");
@@ -335,6 +427,7 @@ public class frmCategorias extends javax.swing.JFrame {
             
             this.bindGrid();
             this.dgCategorias.setModel(modeloCategorias);
+            this.dgCategorias.setRowSorter(null);
         }
         else{
             JOptionPane.showMessageDialog(null, "Ocurrió un error inesperado.");
@@ -354,7 +447,7 @@ public class frmCategorias extends javax.swing.JFrame {
             this.Nuevo();
             this.bindGrid();
             this.dgCategorias.setModel(modeloCategorias);
-            
+            this.dgCategorias.setRowSorter(null);
         }
         else{
             JOptionPane.showMessageDialog(null, "Ocurrió un error inesperado.");
@@ -414,6 +507,13 @@ public class frmCategorias extends javax.swing.JFrame {
         return columns;
     }
     
+    private void Filtrar() {
+        
+        int columnaABuscar = this.cbxFiltroCat.getSelectedIndex();
+        
+        trsFiltro.setRowFilter(RowFilter.regexFilter("(?i)" + txtFiltroCat.getText(), columnaABuscar - 1));
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -454,14 +554,22 @@ public class frmCategorias extends javax.swing.JFrame {
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnNuevo;
+    private javax.swing.JComboBox<String> cbxFiltro;
+    private javax.swing.JComboBox<String> cbxFiltroCat;
     private javax.swing.JTable dgCategorias;
     private javax.swing.JPanel gbxAcciones;
     private javax.swing.JPanel gbxDatos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblFiltro;
+    private javax.swing.JLabel lblFiltroCat;
     private javax.swing.JLabel lblIDCategoria;
     private javax.swing.JLabel lblNombre;
+    private javax.swing.JTextField txtFiltro;
+    private javax.swing.JTextField txtFiltroCat;
     private javax.swing.JTextField txtIDCategoria;
     private javax.swing.JTextField txtNombreCategoria;
     // End of variables declaration//GEN-END:variables

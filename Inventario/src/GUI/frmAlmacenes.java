@@ -9,12 +9,18 @@ import BO.AlmacenBO;
 import DAO.AlmacenDAO;
 import com.sun.rowset.CachedRowSetImpl;
 import java.awt.Component;
+import java.awt.event.ItemEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -22,7 +28,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class frmAlmacenes extends javax.swing.JFrame {
     
-    DefaultTableModel modeloAlmacenes;
+    private TableRowSorter trsFiltro;
+    private DefaultTableModel modeloAlmacenes;
 
     /**
      * Creates new form frmAlmacenes
@@ -30,6 +37,8 @@ public class frmAlmacenes extends javax.swing.JFrame {
     public frmAlmacenes() {
         this.bindGrid();
         initComponents();
+        this.cbxFiltro.insertItemAt("Seleccionar", 0);
+        this.cbxFiltro.setSelectedIndex(0);
         this.txtNombreAlm.requestFocus();
         this.setLocationRelativeTo(null);
         this.setTitle("Gestión de Almacenes");
@@ -64,6 +73,10 @@ public class frmAlmacenes extends javax.swing.JFrame {
         btnGuardarAlmacen = new javax.swing.JButton();
         btnNuevoAlmacen = new javax.swing.JButton();
         btnModificarAlmacen = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        lblFiltro = new javax.swing.JLabel();
+        cbxFiltro = new JComboBox(getColumnas());
+        txtFiltro = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -212,6 +225,47 @@ public class frmAlmacenes extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Filtrar", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
+
+        lblFiltro.setText("Buscar por:");
+
+        cbxFiltro.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxFiltroItemStateChanged(evt);
+            }
+        });
+
+        txtFiltro.setEnabled(false);
+        txtFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtFiltroKeyTyped(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(lblFiltro)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cbxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtFiltro)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblFiltro)
+                    .addComponent(cbxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -220,22 +274,29 @@ public class frmAlmacenes extends javax.swing.JFrame {
             .addComponent(jScrollPane1)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(gbxDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(gbxAcciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(gbxDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(gbxAcciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(gbxDatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(gbxAcciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -290,9 +351,9 @@ public class frmAlmacenes extends javax.swing.JFrame {
         int row = this.dgAlmacenes.getSelectedRow();
         
         String[] datos = new String[3];
-        datos[0] = this.dgAlmacenes.getModel().getValueAt(row, 0).toString();
-        datos[1] = this.dgAlmacenes.getModel().getValueAt(row, 1).toString();
-        datos[2] = this.dgAlmacenes.getModel().getValueAt(row, 2).toString();
+        datos[0] = this.dgAlmacenes.getValueAt(row, 0).toString();
+        datos[1] = this.dgAlmacenes.getValueAt(row, 1).toString();
+        datos[2] = this.dgAlmacenes.getValueAt(row, 2).toString();
         
         this.LlenarDatos(datos);
         
@@ -302,6 +363,35 @@ public class frmAlmacenes extends javax.swing.JFrame {
         this.btnEliminarAlmacen.setEnabled(true);
     }//GEN-LAST:event_dgAlmacenesMouseClicked
 
+    private void txtFiltroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltroKeyTyped
+        txtFiltro.addKeyListener(new KeyAdapter() {
+            public void keyReleased(final KeyEvent e) {
+                String cadena = (txtFiltro.getText());
+                txtFiltro.setText(cadena);
+                repaint();
+                Filtrar();
+            }
+        });
+        
+        trsFiltro = new TableRowSorter(this.dgAlmacenes.getModel());
+        this.dgAlmacenes.setRowSorter(trsFiltro);
+    }//GEN-LAST:event_txtFiltroKeyTyped
+
+    private void cbxFiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxFiltroItemStateChanged
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            this.txtFiltro.setText("");
+            
+            if (evt.getItem() != "Seleccionar") {
+                this.txtFiltro.setEnabled(true);
+                this.txtFiltro.requestFocus();
+            } else {
+                this.cbxFiltro.setSelectedIndex(0);
+                this.txtFiltro.setEnabled(false);
+                this.dgAlmacenes.setRowSorter(null);
+            }
+        }
+    }//GEN-LAST:event_cbxFiltroItemStateChanged
+
     private void Nuevo(){
         this.txtIDAlm.setText("");
         this.txtNombreAlm.setText("");
@@ -309,6 +399,9 @@ public class frmAlmacenes extends javax.swing.JFrame {
         
         this.bindGrid();
         this.dgAlmacenes.setModel(modeloAlmacenes);
+        this.cbxFiltro.setSelectedIndex(0);
+        this.txtFiltro.setEnabled(false);
+        this.dgAlmacenes.setRowSorter(null);
         
         this.btnGuardarAlmacen.setEnabled(true);
         this.btnModificarAlmacen.setEnabled(false);
@@ -330,6 +423,7 @@ public class frmAlmacenes extends javax.swing.JFrame {
             
             this.bindGrid();
             this.dgAlmacenes.setModel(modeloAlmacenes);
+            this.dgAlmacenes.setRowSorter(null);
         }
         else{
             JOptionPane.showMessageDialog(null, "Ocurrió un error inesperado.");
@@ -352,6 +446,7 @@ public class frmAlmacenes extends javax.swing.JFrame {
             
             this.bindGrid();
             this.dgAlmacenes.setModel(modeloAlmacenes);
+            this.dgAlmacenes.setRowSorter(null);
         }
         else{
             JOptionPane.showMessageDialog(null, "Ocurrió un error inesperado.");
@@ -371,6 +466,7 @@ public class frmAlmacenes extends javax.swing.JFrame {
             this.Nuevo();
             this.bindGrid();
             this.dgAlmacenes.setModel(modeloAlmacenes);
+            this.dgAlmacenes.setRowSorter(null);
             
         }
         else{
@@ -425,12 +521,19 @@ public class frmAlmacenes extends javax.swing.JFrame {
     
     private String[] getColumnas(){
         String columns[] = new String[]{
-            "ID Almacen",
+            "ID Almacén",
             "Nombre",
             "Dirección"
         };
         
         return columns;
+    }
+    
+    private void Filtrar() {
+        
+        int columnaABuscar = this.cbxFiltro.getSelectedIndex();
+        
+        trsFiltro.setRowFilter(RowFilter.regexFilter("(?i)" + txtFiltro.getText(), columnaABuscar - 1));
     }
     
     /**
@@ -473,16 +576,20 @@ public class frmAlmacenes extends javax.swing.JFrame {
     private javax.swing.JButton btnGuardarAlmacen;
     private javax.swing.JButton btnModificarAlmacen;
     private javax.swing.JButton btnNuevoAlmacen;
+    private javax.swing.JComboBox<String> cbxFiltro;
     private javax.swing.JTable dgAlmacenes;
     private javax.swing.JPanel gbxAcciones;
     private javax.swing.JPanel gbxDatos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblDireccion;
+    private javax.swing.JLabel lblFiltro;
     private javax.swing.JLabel lblIDAlm;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JTextField txtDireccionAlm;
+    private javax.swing.JTextField txtFiltro;
     private javax.swing.JTextField txtIDAlm;
     private javax.swing.JTextField txtNombreAlm;
     // End of variables declaration//GEN-END:variables
