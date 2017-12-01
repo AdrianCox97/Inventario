@@ -118,7 +118,7 @@ public class frmAlmacenes extends javax.swing.JFrame {
         jScrollPane1.setViewportView(dgAlmacenes);
         dgAlmacenes.getAccessibleContext().setAccessibleName("dgAlmacenes");
 
-        gbxDatos.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
+        gbxDatos.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Datos del Almacén", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
 
         lblNombre.setText("Nombre");
 
@@ -144,7 +144,7 @@ public class frmAlmacenes extends javax.swing.JFrame {
                     .addComponent(txtIDAlm)
                     .addComponent(txtNombreAlm)
                     .addComponent(txtDireccionAlm, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGap(24, 24, 24))
         );
         gbxDatosLayout.setVerticalGroup(
             gbxDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,38 +161,38 @@ public class frmAlmacenes extends javax.swing.JFrame {
                 .addGroup(gbxDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDireccion)
                     .addComponent(txtDireccionAlm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        gbxAcciones.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Acciones", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
+        gbxAcciones.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Acciones", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
 
         btnEliminarAlmacen.setText("Eliminar");
         btnEliminarAlmacen.setEnabled(false);
-        btnEliminarAlmacen.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnEliminarAlmacenMouseClicked(evt);
+        btnEliminarAlmacen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarAlmacenActionPerformed(evt);
             }
         });
 
         btnGuardarAlmacen.setText("Agregar");
-        btnGuardarAlmacen.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnGuardarAlmacenMouseClicked(evt);
+        btnGuardarAlmacen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarAlmacenActionPerformed(evt);
             }
         });
 
         btnNuevoAlmacen.setText("Nuevo");
-        btnNuevoAlmacen.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnNuevoAlmacenMouseClicked(evt);
+        btnNuevoAlmacen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoAlmacenActionPerformed(evt);
             }
         });
 
         btnModificarAlmacen.setText("Modificar");
         btnModificarAlmacen.setEnabled(false);
-        btnModificarAlmacen.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnModificarAlmacenMouseClicked(evt);
+        btnModificarAlmacen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarAlmacenActionPerformed(evt);
             }
         });
 
@@ -201,7 +201,7 @@ public class frmAlmacenes extends javax.swing.JFrame {
         gbxAccionesLayout.setHorizontalGroup(
             gbxAccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(gbxAccionesLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addGap(24, 24, 24)
                 .addGroup(gbxAccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnModificarAlmacen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnNuevoAlmacen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -209,7 +209,7 @@ public class frmAlmacenes extends javax.swing.JFrame {
                 .addGroup(gbxAccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnGuardarAlmacen)
                     .addComponent(btnEliminarAlmacen))
-                .addGap(19, 19, 19))
+                .addGap(24, 24, 24))
         );
         gbxAccionesLayout.setVerticalGroup(
             gbxAccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,7 +225,7 @@ public class frmAlmacenes extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Filtrar", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Filtrar", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
 
         lblFiltro.setText("Buscar por:");
 
@@ -247,13 +247,13 @@ public class frmAlmacenes extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(24, 24, 24)
                 .addComponent(lblFiltro)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cbxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtFiltro)
-                .addContainerGap())
+                .addGap(24, 24, 24))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,7 +270,7 @@ public class frmAlmacenes extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 595, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 619, Short.MAX_VALUE)
             .addComponent(jScrollPane1)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
@@ -302,13 +302,13 @@ public class frmAlmacenes extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnNuevoAlmacenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoAlmacenMouseClicked
+    private void btnNuevoAlmacenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoAlmacenActionPerformed
         this.Nuevo();
         this.txtNombreAlm.requestFocus();
         this.bindGrid();
-    }//GEN-LAST:event_btnNuevoAlmacenMouseClicked
+    }//GEN-LAST:event_btnNuevoAlmacenActionPerformed
 
-    private void btnGuardarAlmacenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarAlmacenMouseClicked
+    private void btnGuardarAlmacenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarAlmacenActionPerformed
         try {
             if (this.ValidarVacios()){
                 this.Guardar();
@@ -319,9 +319,9 @@ public class frmAlmacenes extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(frmAlmacenes.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_btnGuardarAlmacenMouseClicked
+    }//GEN-LAST:event_btnGuardarAlmacenActionPerformed
 
-    private void btnModificarAlmacenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarAlmacenMouseClicked
+    private void btnModificarAlmacenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarAlmacenActionPerformed
         try {
             if (this.txtIDAlm.getText().trim().length() != 0){
                 this.Modificar();
@@ -332,9 +332,9 @@ public class frmAlmacenes extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(frmAlmacenes.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_btnModificarAlmacenMouseClicked
+    }//GEN-LAST:event_btnModificarAlmacenActionPerformed
 
-    private void btnEliminarAlmacenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarAlmacenMouseClicked
+    private void btnEliminarAlmacenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarAlmacenActionPerformed
         try {
             if (this.txtIDAlm.getText().trim().length() != 0){
                 this.Eliminar();
@@ -345,7 +345,7 @@ public class frmAlmacenes extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(frmAlmacenes.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_btnEliminarAlmacenMouseClicked
+    }//GEN-LAST:event_btnEliminarAlmacenActionPerformed
 
     private void dgAlmacenesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dgAlmacenesMouseClicked
         int row = this.dgAlmacenes.getSelectedRow();
@@ -363,20 +363,6 @@ public class frmAlmacenes extends javax.swing.JFrame {
         this.btnEliminarAlmacen.setEnabled(true);
     }//GEN-LAST:event_dgAlmacenesMouseClicked
 
-    private void txtFiltroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltroKeyTyped
-        txtFiltro.addKeyListener(new KeyAdapter() {
-            public void keyReleased(final KeyEvent e) {
-                String cadena = (txtFiltro.getText());
-                txtFiltro.setText(cadena);
-                repaint();
-                Filtrar();
-            }
-        });
-        
-        trsFiltro = new TableRowSorter(this.dgAlmacenes.getModel());
-        this.dgAlmacenes.setRowSorter(trsFiltro);
-    }//GEN-LAST:event_txtFiltroKeyTyped
-
     private void cbxFiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxFiltroItemStateChanged
         if (evt.getStateChange() == ItemEvent.SELECTED) {
             this.txtFiltro.setText("");
@@ -391,6 +377,20 @@ public class frmAlmacenes extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_cbxFiltroItemStateChanged
+
+    private void txtFiltroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltroKeyTyped
+        txtFiltro.addKeyListener(new KeyAdapter() {
+            public void keyReleased(final KeyEvent e) {
+                String cadena = (txtFiltro.getText());
+                txtFiltro.setText(cadena);
+                repaint();
+                Filtrar();
+            }
+        });
+        
+        trsFiltro = new TableRowSorter(this.dgAlmacenes.getModel());
+        this.dgAlmacenes.setRowSorter(trsFiltro);
+    }//GEN-LAST:event_txtFiltroKeyTyped
 
     private void Nuevo(){
         this.txtIDAlm.setText("");
@@ -490,7 +490,7 @@ public class frmAlmacenes extends javax.swing.JFrame {
                 txt = (JTextField)componentes[i];
                 
                 if (txt.getName() != "txtIDAlm"){
-                    if (txt.getText().trim().length() == 0) {
+                    if (txt.getText().trim().isEmpty()) {
                         return false;
                     }
                 }

@@ -14,6 +14,15 @@ public class AlmacenBO {
     private String Nombre;
     private String Direccion;
 
+    public AlmacenBO(){
+        
+    }
+    
+    public AlmacenBO(String Nombre, int ID){
+        this.IDAlmacen = ID;
+        this.Nombre = Nombre;
+    }
+    
     /**
      * @return the IDAlmacen
      */
@@ -54,5 +63,9 @@ public class AlmacenBO {
      */
     public void setDireccion(String Direccion) {
         this.Direccion = Direccion;
+    }
+    
+    public String toString(){
+        return Nombre;
     }
 }

@@ -12,6 +12,15 @@ package BO;
 public class CategoriaBO {
     private int IDCategoria;
     private String Nombre;
+    
+    public CategoriaBO(){
+        
+    }
+    
+    public CategoriaBO(String Nombre, int ID){
+        this.IDCategoria = ID;
+        this.Nombre = Nombre;
+    }
 
     /**
      * @return the IDCategoria
@@ -39,5 +48,10 @@ public class CategoriaBO {
      */
     public void setNombre(String Nombre) {
         this.Nombre = Nombre;
+    }
+    
+    /* OTROS */
+    public String toString(){
+        return Nombre;
     }
 }

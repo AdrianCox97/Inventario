@@ -16,9 +16,9 @@ public class ProductoBO {
     private double PrecioUnitario;
     private double PrecioMayoreo;
     private int Cantidad;
+    private double Stock;
     private int IDAlmacen;
     private int IDCategoria;
-    private int Stock;
 
     /**
      * @return the ID
@@ -105,6 +105,20 @@ public class ProductoBO {
     }
 
     /**
+     * @return the Stock
+     */
+    public double getStock() {
+        return Stock;
+    }
+
+    /**
+     * @param Stock the Stock to set
+     */
+    public void setStock(double Stock) {
+        this.Stock = Stock;
+    }
+
+    /**
      * @return the IDAlmacen
      */
     public int getIDAlmacen() {
@@ -130,19 +144,5 @@ public class ProductoBO {
      */
     public void setIDCategoria(int IDCategoria) {
         this.IDCategoria = IDCategoria;
-    }
-
-    /**
-     * @return the Stock
-     */
-    public int getStock() {
-        return Stock;
-    }
-
-    /**
-     * @param Stock the Stock to set
-     */
-    public void setStock(int Stock) {
-        this.Stock = Stock;
     }
 }
