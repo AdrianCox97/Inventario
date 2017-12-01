@@ -7,6 +7,7 @@ package GUI;
 
 import BO.AlmacenBO;
 import DAO.AlmacenDAO;
+import DAO.Conexion;
 import com.sun.rowset.CachedRowSetImpl;
 import java.awt.Component;
 import java.awt.event.ItemEvent;
@@ -21,6 +22,11 @@ import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -73,6 +79,7 @@ public class frmAlmacenes extends javax.swing.JFrame {
         btnGuardarAlmacen = new javax.swing.JButton();
         btnNuevoAlmacen = new javax.swing.JButton();
         btnModificarAlmacen = new javax.swing.JButton();
+        btnImprimirReporte = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         lblFiltro = new javax.swing.JLabel();
         cbxFiltro = new JComboBox(getColumnas());
@@ -161,7 +168,7 @@ public class frmAlmacenes extends javax.swing.JFrame {
                 .addGroup(gbxDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDireccion)
                     .addComponent(txtDireccionAlm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         gbxAcciones.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Acciones", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
@@ -196,6 +203,20 @@ public class frmAlmacenes extends javax.swing.JFrame {
             }
         });
 
+        btnImprimirReporte.setActionCommand("Imprimir Reporte");
+        btnImprimirReporte.setEnabled(false);
+        btnImprimirReporte.setLabel("Imprimir Reporte");
+        btnImprimirReporte.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnImprimirReporteMouseClicked(evt);
+            }
+        });
+        btnImprimirReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImprimirReporteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout gbxAccionesLayout = new javax.swing.GroupLayout(gbxAcciones);
         gbxAcciones.setLayout(gbxAccionesLayout);
         gbxAccionesLayout.setHorizontalGroup(
@@ -210,19 +231,24 @@ public class frmAlmacenes extends javax.swing.JFrame {
                     .addComponent(btnGuardarAlmacen)
                     .addComponent(btnEliminarAlmacen))
                 .addGap(24, 24, 24))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, gbxAccionesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnImprimirReporte)
+                .addGap(73, 73, 73))
         );
         gbxAccionesLayout.setVerticalGroup(
             gbxAccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(gbxAccionesLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(gbxAccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnNuevoAlmacen, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
-                    .addComponent(btnGuardarAlmacen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(gbxAccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnModificarAlmacen, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
-                    .addComponent(btnEliminarAlmacen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(gbxAccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnNuevoAlmacen, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGuardarAlmacen, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(gbxAccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnModificarAlmacen, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminarAlmacen, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnImprimirReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Filtrar", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
@@ -361,6 +387,7 @@ public class frmAlmacenes extends javax.swing.JFrame {
         this.btnGuardarAlmacen.setEnabled(false);
         this.btnModificarAlmacen.setEnabled(true);
         this.btnEliminarAlmacen.setEnabled(true);
+         this.btnImprimirReporte.setEnabled(true);
     }//GEN-LAST:event_dgAlmacenesMouseClicked
 
     private void cbxFiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxFiltroItemStateChanged
@@ -391,6 +418,28 @@ public class frmAlmacenes extends javax.swing.JFrame {
         trsFiltro = new TableRowSorter(this.dgAlmacenes.getModel());
         this.dgAlmacenes.setRowSorter(trsFiltro);
     }//GEN-LAST:event_txtFiltroKeyTyped
+
+    private void btnImprimirReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirReporteActionPerformed
+        
+      
+       
+    }//GEN-LAST:event_btnImprimirReporteActionPerformed
+
+    private void btnImprimirReporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnImprimirReporteMouseClicked
+        try
+       {
+           Conexion dato = new Conexion();
+           JasperReport reporte= (JasperReport) JRLoader.loadObject("Almacenes.jasper");
+          // Map parametro= new HashMap();
+           JasperPrint j= JasperFillManager.fillReport(reporte,null,dato.getConexion());
+           JasperViewer jv = new JasperViewer(j,false);
+           jv.setVisible(true);
+       }
+       catch(Exception e)
+       {
+           
+       }
+    }//GEN-LAST:event_btnImprimirReporteMouseClicked
 
     private void Nuevo(){
         this.txtIDAlm.setText("");
@@ -574,6 +623,7 @@ public class frmAlmacenes extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEliminarAlmacen;
     private javax.swing.JButton btnGuardarAlmacen;
+    private javax.swing.JButton btnImprimirReporte;
     private javax.swing.JButton btnModificarAlmacen;
     private javax.swing.JButton btnNuevoAlmacen;
     private javax.swing.JComboBox<String> cbxFiltro;

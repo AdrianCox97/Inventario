@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Almacenes" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4f754a80-de64-426d-8716-8e7072148fe5">
+	<property name="ireport.zoom" value="1.1566298682886063"/>
+	<property name="ireport.x" value="117"/>
+	<property name="ireport.y" value="18"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<subDataset name="PieChartDataset" uuid="02cbe2b1-9a67-4557-9275-1ab89e3abfde"/>
+	<queryString>
+		<![CDATA[SELECT
+     almacenes.`IDAlmacen` AS almacenes_IDAlmacen,
+     almacenes.`Nombre` AS almacenes_Nombre,
+     almacenes.`Direccion` AS almacenes_Direccion
+FROM
+     `almacenes` almacenes]]>
+	</queryString>
+	<field name="almacenes_IDAlmacen" class="java.lang.Integer"/>
+	<field name="almacenes_Nombre" class="java.lang.String"/>
+	<field name="almacenes_Direccion" class="java.lang.String"/>
+	<background>
+		<band height="555" splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="94" splitType="Stretch">
+			<staticText>
+				<reportElement style="SubTitle" x="336" y="65" width="449" height="29" uuid="51966ec0-ab10-4f80-b63a-c8930c79c404"/>
+				<textElement textAlignment="Right">
+					<font size="22" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Wal-Mart de México, S. de R.L. de C.V.]]></text>
+			</staticText>
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="0" width="822" height="65" forecolor="#006699" backcolor="#FFFFFF" uuid="3a2df1ba-b6f2-4c22-84d9-68304f05efa5"/>
+				<staticText>
+					<reportElement style="Title" x="231" y="0" width="578" height="65" forecolor="#006699" backcolor="#FFFFFF" uuid="af79117d-df3d-4991-8c6e-bc7a17bf47e9"/>
+					<textElement textAlignment="Right">
+						<font size="54" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Almacenes]]></text>
+				</staticText>
+			</frame>
+			<image>
+				<reportElement x="0" y="13" width="211" height="52" uuid="c1af2bb0-6f96-4593-8810-f38039f4e44f"/>
+				<imageExpression><![CDATA["C:\\Users\\joses\\Documents\\GitHub\\Inventario\\Inventario\\src\\Reportes\\Walmart_logo.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="17" splitType="Stretch">
+			<frame>
+				<reportElement x="144" y="0" width="301" height="14" uuid="06614518-345f-4437-af16-f85a718bd3b3"/>
+				<staticText>
+					<reportElement style="Column header" positionType="Float" x="0" y="0" width="274" height="14" forecolor="#000000" uuid="52435b4c-34bd-4568-a060-4ad7efd706d7"/>
+					<textElement textAlignment="Center">
+						<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Nombre]]></text>
+				</staticText>
+			</frame>
+			<staticText>
+				<reportElement style="Column header" positionType="Float" x="0" y="0" width="144" height="14" forecolor="#000000" uuid="9df4cf13-a213-4ee6-b639-df9266fe8c9f"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[Código]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" positionType="Float" x="445" y="0" width="357" height="14" forecolor="#000000" uuid="4a183929-0899-4810-a9e4-495c0ed59de5"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[Dirección]]></text>
+			</staticText>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="16" width="802" height="1" uuid="040c028f-10fd-43f7-97eb-8045c1254b32"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="Detail" positionType="Float" x="4" y="1" width="140" height="14" uuid="05122df9-3048-4a19-8ace-a2c3560adfaf"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{almacenes_IDAlmacen}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="Detail" positionType="Float" x="144" y="1" width="301" height="14" uuid="ed7926b1-0c2f-4d14-a0c5-ffaa07c80f79"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{almacenes_Nombre}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="Detail" positionType="Float" x="445" y="1" width="357" height="14" uuid="5f680f5c-ca52-4ec6-beeb-7173a7429a86"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{almacenes_Direccion}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="1" y="18" width="800" height="1" uuid="68a9f7e6-70c5-444e-b567-afb28bc8c37a"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="10" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="16" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="2" y="0" width="800" height="16" forecolor="#D0B48E" backcolor="#006699" uuid="35f99642-4804-4f3a-a312-3b0de69bffae"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="753" y="0" width="40" height="16" forecolor="#FFFFFF" uuid="f6880864-4a9d-41e5-8fd7-952b386dab3f"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="12" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="673" y="0" width="80" height="16" forecolor="#FFFFFF" uuid="f4ecf9e6-0bd9-43f6-844b-b231e7a47dba"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="12" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="2" y="0" width="197" height="16" forecolor="#FFFFFF" uuid="9cabd3c0-4109-4148-9732-3a80723cc7c1"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="12" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

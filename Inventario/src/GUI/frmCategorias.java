@@ -7,6 +7,7 @@ package GUI;
 
 import BO.CategoriaBO;
 import DAO.CategoriaDAO;
+import DAO.Conexion;
 import com.sun.rowset.CachedRowSetImpl;
 import java.awt.Component;
 import java.awt.event.ItemEvent;
@@ -21,6 +22,11 @@ import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -71,6 +77,7 @@ public class frmCategorias extends javax.swing.JFrame {
         btnAgregar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
+        btnImprimir = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         lblFiltroCat = new javax.swing.JLabel();
         cbxFiltroCat = new JComboBox(getColumnas());
@@ -183,33 +190,51 @@ public class frmCategorias extends javax.swing.JFrame {
             }
         });
 
+        btnImprimir.setText("Imprimir Reporte");
+        btnImprimir.setEnabled(false);
+        btnImprimir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnImprimirMouseClicked(evt);
+            }
+        });
+        btnImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImprimirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout gbxAccionesLayout = new javax.swing.GroupLayout(gbxAcciones);
         gbxAcciones.setLayout(gbxAccionesLayout);
         gbxAccionesLayout.setHorizontalGroup(
             gbxAccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(gbxAccionesLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addGroup(gbxAccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnNuevo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(32, 32, 32)
+                .addGroup(gbxAccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnModificar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(gbxAccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAgregar)
                     .addComponent(btnEliminar))
-                .addGap(24, 24, 24))
+                .addGap(26, 26, 26))
+            .addGroup(gbxAccionesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnImprimir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         gbxAccionesLayout.setVerticalGroup(
             gbxAccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(gbxAccionesLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
                 .addGroup(gbxAccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNuevo)
                     .addComponent(btnAgregar))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(gbxAccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnModificar)
-                    .addComponent(btnEliminar))
-                .addGap(20, 20, 20))
+                    .addComponent(btnEliminar)
+                    .addComponent(btnModificar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnImprimir)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Filtrar", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
@@ -345,6 +370,7 @@ public class frmCategorias extends javax.swing.JFrame {
         this.btnAgregar.setEnabled(false);
         this.btnModificar.setEnabled(true);
         this.btnEliminar.setEnabled(true);
+        this.btnImprimir.setEnabled(true);
     }//GEN-LAST:event_dgCategoriasMouseClicked
 
     private void cbxFiltroCatItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxFiltroCatItemStateChanged
@@ -375,6 +401,26 @@ public class frmCategorias extends javax.swing.JFrame {
         trsFiltro = new TableRowSorter(this.dgCategorias.getModel());
         this.dgCategorias.setRowSorter(trsFiltro);
     }//GEN-LAST:event_txtFiltroCatKeyTyped
+
+    private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnImprimirActionPerformed
+
+    private void btnImprimirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnImprimirMouseClicked
+       try
+       {
+           Conexion dato = new Conexion();
+           JasperReport reporte= (JasperReport) JRLoader.loadObject("Categorias.jasper");
+          // Map parametro= new HashMap();
+           JasperPrint j= JasperFillManager.fillReport(reporte,null,dato.getConexion());
+           JasperViewer jv = new JasperViewer(j,false);
+           jv.setVisible(true);
+       }
+       catch(Exception e)
+       {
+           
+       }
+    }//GEN-LAST:event_btnImprimirMouseClicked
 
     private void Nuevo(){
         this.txtIDCategoria.setText("");
@@ -552,6 +598,7 @@ public class frmCategorias extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnImprimir;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JComboBox<String> cbxFiltroCat;
