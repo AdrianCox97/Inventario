@@ -55,7 +55,7 @@ public class AlmacenDAO {
             try {
                 cc.close();
             } catch (SQLException ex) {
-                Logger.getLogger(ProductoDAO.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(AlmacenDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return retorno;
@@ -79,7 +79,7 @@ public class AlmacenDAO {
             
         }   
         catch(SQLException ex){
-            Logger.getLogger(ProductoDAO.class.getName()).log(Level.SEVERE, null, ex); 
+            Logger.getLogger(AlmacenDAO.class.getName()).log(Level.SEVERE, null, ex); 
         }
         finally{
             con.cerrarConexion();
@@ -102,7 +102,7 @@ public class AlmacenDAO {
             ps.close();
         }
         catch(SQLException ex){
-           Logger.getLogger(ProductoDAO.class.getName()).log(Level.SEVERE, null, ex); 
+           Logger.getLogger(AlmacenDAO.class.getName()).log(Level.SEVERE, null, ex); 
         }
         finally{
             con.cerrarConexion();
@@ -127,7 +127,7 @@ public class AlmacenDAO {
             crs.populate(rs);
         }
         catch(SQLException ex){
-           Logger.getLogger(ProductoDAO.class.getName()).log(Level.SEVERE, null, ex);
+           Logger.getLogger(AlmacenDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
             con.cerrarConexion();

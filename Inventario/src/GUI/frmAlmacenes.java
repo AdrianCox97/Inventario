@@ -132,7 +132,7 @@ public class frmAlmacenes extends javax.swing.JFrame {
         txtIDAlm.setEnabled(false);
         txtIDAlm.setName("txtIDAlm"); // NOI18N
 
-        lblIDAlm.setText("ID");
+        lblIDAlm.setText("Clave");
 
         javax.swing.GroupLayout gbxDatosLayout = new javax.swing.GroupLayout(gbxDatos);
         gbxDatos.setLayout(gbxDatosLayout);
@@ -567,7 +567,7 @@ public class frmAlmacenes extends javax.swing.JFrame {
     
     private String[] getColumnas(){
         String columns[] = new String[]{
-            "ID Almacén",
+            "Clave",
             "Nombre",
             "Dirección"
         };

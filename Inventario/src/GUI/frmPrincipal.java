@@ -8,6 +8,7 @@ package GUI;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import javax.swing.ImageIcon;
+import Objetos.Imagen;
 
 /**
  *
@@ -39,10 +40,12 @@ public class frmPrincipal extends javax.swing.JFrame {
         imgProveedores = new javax.swing.JPanel();
         imgAlmacenes = new javax.swing.JPanel();
         imgLogo = new javax.swing.JPanel();
+        imgMovimientos = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         imgCategorias.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        imgCategorias.setToolTipText("Catálogo de Categorías");
         imgCategorias.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 imgCategoriasMouseClicked(evt);
@@ -61,6 +64,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         );
 
         imgProductos.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        imgProductos.setToolTipText("Catálogo de Productos");
         imgProductos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 imgProductosMouseClicked(evt);
@@ -79,6 +83,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         );
 
         imgProveedores.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        imgProveedores.setToolTipText("Catálogo de Proveedores");
         imgProveedores.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 imgProveedoresMouseClicked(evt);
@@ -97,6 +102,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         );
 
         imgAlmacenes.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        imgAlmacenes.setToolTipText("Catálogo de Almacenes");
         imgAlmacenes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 imgAlmacenesMouseClicked(evt);
@@ -127,22 +133,43 @@ public class frmPrincipal extends javax.swing.JFrame {
             .addGap(0, 66, Short.MAX_VALUE)
         );
 
+        imgMovimientos.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        imgMovimientos.setToolTipText("Registro de Movimientos");
+        imgMovimientos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                imgMovimientosMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout imgMovimientosLayout = new javax.swing.GroupLayout(imgMovimientos);
+        imgMovimientos.setLayout(imgMovimientosLayout);
+        imgMovimientosLayout.setHorizontalGroup(
+            imgMovimientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        imgMovimientosLayout.setVerticalGroup(
+            imgMovimientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(51, 51, 51)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(imgLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(imgProveedores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(imgCategorias, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(54, 54, 54)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(imgProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(imgAlmacenes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(imgLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(imgProveedores, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(imgCategorias, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGap(54, 54, 54)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(imgProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(imgAlmacenes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(imgMovimientos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(60, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -150,7 +177,7 @@ public class frmPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(imgLogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(imgProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(imgCategorias, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -158,7 +185,9 @@ public class frmPrincipal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(imgProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(imgAlmacenes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45))
+                .addGap(18, 18, 18)
+                .addComponent(imgMovimientos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -179,6 +208,10 @@ public class frmPrincipal extends javax.swing.JFrame {
     private void imgAlmacenesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgAlmacenesMouseClicked
         new frmAlmacenes().setVisible(true);
     }//GEN-LAST:event_imgAlmacenesMouseClicked
+
+    private void imgMovimientosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgMovimientosMouseClicked
+        new frmMovimientos().setVisible(true);
+    }//GEN-LAST:event_imgMovimientosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -235,37 +268,42 @@ public class frmPrincipal extends javax.swing.JFrame {
         Imagen imageAlmacenes = new Imagen(104, 104, "/Recursos/Almacenes.png");
         imgAlmacenes.add(imageAlmacenes);
         imgAlmacenes.repaint();
+        
+        Imagen imageMovimientos = new Imagen(104, 104, "/Recursos/bitacora.png");
+        imgMovimientos.add(imageMovimientos);
+        imgMovimientos.repaint();
     }
     
-    public class Imagen extends javax.swing.JPanel {
-            private String url;
-            public Imagen(int ancho, int alto, String urlImg) {
-                this.url = urlImg;
-                this.setSize(ancho, alto); //se selecciona el tamaño del panel
-            }
-
-            //Se crea un método cuyo parámetro debe ser un objeto Graphics
-
-            public void paint(Graphics grafico) {
-            Dimension height = getSize();
-
-            //Se selecciona la imagen que tenemos en el paquete de la //ruta del programa
-
-            ImageIcon Img = new ImageIcon(getClass().getResource(url)); 
-
-            //se dibuja la imagen que tenemos en el paquete Images //dentro de un panel
-
-            grafico.drawImage(Img.getImage(), 0, 0, height.width, height.height, null);
-
-            setOpaque(false);
-            super.paintComponent(grafico);
-            }
-    }
+//    public class Imagen extends javax.swing.JPanel {
+//            private String url;
+//            public Imagen(int ancho, int alto, String urlImg) {
+//                this.url = urlImg;
+//                this.setSize(ancho, alto); //se selecciona el tamaño del panel
+//            }
+//
+//            //Se crea un método cuyo parámetro debe ser un objeto Graphics
+//
+//            public void paint(Graphics grafico) {
+//            Dimension height = getSize();
+//
+//            //Se selecciona la imagen que tenemos en el paquete de la //ruta del programa
+//
+//            ImageIcon Img = new ImageIcon(getClass().getResource(url)); 
+//
+//            //se dibuja la imagen que tenemos en el paquete Images //dentro de un panel
+//
+//            grafico.drawImage(Img.getImage(), 0, 0, height.width, height.height, null);
+//
+//            setOpaque(false);
+//            super.paintComponent(grafico);
+//            }
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel imgAlmacenes;
     private javax.swing.JPanel imgCategorias;
     private javax.swing.JPanel imgLogo;
+    private javax.swing.JPanel imgMovimientos;
     private javax.swing.JPanel imgProductos;
     private javax.swing.JPanel imgProveedores;
     // End of variables declaration//GEN-END:variables

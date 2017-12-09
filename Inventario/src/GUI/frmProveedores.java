@@ -673,7 +673,7 @@ public class frmProveedores extends javax.swing.JFrame {
     
     private String[] getColumnas(){
         String columns[] = new String[]{
-            "ID Proveedor",
+            "Clave",
             "Nombre",
             "Apellido Paterno",
             "Apellido Materno",

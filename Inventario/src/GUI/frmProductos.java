@@ -719,7 +719,7 @@ public class frmProductos extends javax.swing.JFrame {
     
     private String[] getColumnas(){
         String columns[] = new String[]{
-            "ID Producto",
+            "Código",
             "Nombre",
             "Descripción",
             "Precio Unitario",

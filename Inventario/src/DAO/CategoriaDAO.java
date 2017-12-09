@@ -54,7 +54,7 @@ public class CategoriaDAO {
             try {
                 cc.close();
             } catch (SQLException ex) {
-                Logger.getLogger(ProductoDAO.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(CategoriaDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return retorno;
@@ -77,7 +77,7 @@ public class CategoriaDAO {
             
         }   
         catch(SQLException ex){
-            Logger.getLogger(ProductoDAO.class.getName()).log(Level.SEVERE, null, ex); 
+            Logger.getLogger(CategoriaDAO.class.getName()).log(Level.SEVERE, null, ex); 
         }
         finally{
             con.cerrarConexion();
@@ -100,7 +100,7 @@ public class CategoriaDAO {
             ps.close();
         }
         catch(SQLException ex){
-           Logger.getLogger(ProductoDAO.class.getName()).log(Level.SEVERE, null, ex); 
+           Logger.getLogger(CategoriaDAO.class.getName()).log(Level.SEVERE, null, ex); 
         }
         finally{
             con.cerrarConexion();
@@ -125,7 +125,7 @@ public class CategoriaDAO {
             crs.populate(rs);
         }
         catch(SQLException ex){
-           Logger.getLogger(ProductoDAO.class.getName()).log(Level.SEVERE, null, ex);
+           Logger.getLogger(CategoriaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
             con.cerrarConexion();

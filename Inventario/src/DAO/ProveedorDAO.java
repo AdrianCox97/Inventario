@@ -61,7 +61,7 @@ public class ProveedorDAO {
             try {
                 cc.close();
             } catch (SQLException ex) {
-                Logger.getLogger(ProductoDAO.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ProveedorDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return retorno;
@@ -91,7 +91,7 @@ public class ProveedorDAO {
             
         }   
         catch(SQLException ex){
-            Logger.getLogger(ProductoDAO.class.getName()).log(Level.SEVERE, null, ex); 
+            Logger.getLogger(ProveedorDAO.class.getName()).log(Level.SEVERE, null, ex); 
         }
         finally{
             con.cerrarConexion();
@@ -114,7 +114,7 @@ public class ProveedorDAO {
             ps.close();
         }
         catch(SQLException ex){
-           Logger.getLogger(ProductoDAO.class.getName()).log(Level.SEVERE, null, ex); 
+           Logger.getLogger(ProveedorDAO.class.getName()).log(Level.SEVERE, null, ex); 
         }
         finally{
             con.cerrarConexion();
@@ -139,7 +139,7 @@ public class ProveedorDAO {
             crs.populate(rs);
         }
         catch(SQLException ex){
-           Logger.getLogger(ProductoDAO.class.getName()).log(Level.SEVERE, null, ex);
+           Logger.getLogger(ProveedorDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
             con.cerrarConexion();

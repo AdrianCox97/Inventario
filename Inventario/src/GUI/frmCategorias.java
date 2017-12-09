@@ -120,7 +120,7 @@ public class frmCategorias extends javax.swing.JFrame {
 
         gbxDatos.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Datos de la Categoría", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
 
-        lblIDCategoria.setText("ID");
+        lblIDCategoria.setText("Clave");
 
         txtIDCategoria.setEnabled(false);
         txtIDCategoria.setName("txtIDCategoria"); // NOI18N
@@ -542,7 +542,7 @@ public class frmCategorias extends javax.swing.JFrame {
     
     private String[] getColumnas(){
         String columns[] = new String[]{
-            "ID Categoria",
+            "Clave",
             "Nombre"
         };
         

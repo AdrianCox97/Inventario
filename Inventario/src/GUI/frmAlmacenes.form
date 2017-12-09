@@ -221,7 +221,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblIDAlm">
           <Properties>
-            <Property name="text" type="java.lang.String" value="ID"/>
+            <Property name="text" type="java.lang.String" value="Clave"/>
           </Properties>
         </Component>
       </SubComponents>
