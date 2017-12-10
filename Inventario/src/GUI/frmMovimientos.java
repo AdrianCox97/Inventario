@@ -31,6 +31,7 @@ public class frmMovimientos extends javax.swing.JFrame {
     private TableRowSorter trsFiltro;
     DefaultTableModel modeloMovimientos;
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    String fecha;
     
     /**
      * Creates new form frmMovimientos
@@ -256,7 +257,7 @@ public class frmMovimientos extends javax.swing.JFrame {
 
     private void dpFiltroPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dpFiltroPropertyChange
         if ("date".equals(evt.getPropertyName())) {
-            String fecha = dateFormat.format(evt.getNewValue());
+            fecha = dateFormat.format(evt.getNewValue());
             
             trsFiltro = new TableRowSorter(this.dgMovimientos.getModel());
             Filtrar(fecha);
@@ -265,6 +266,7 @@ public class frmMovimientos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_dpFiltroPropertyChange
 
+    
     private void bindGrid(){
         try {
             modeloMovimientos = new DefaultTableModel(null, this.getColumnas());
