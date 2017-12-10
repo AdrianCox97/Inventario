@@ -18,7 +18,7 @@ import java.util.logging.Level;
 public class Conexion {
     //variables de la clase
     static String usuario = "root";
-    static String contraseña = "";
+    static String contraseña = "admin1234";
     static String ssl = "useSSL=false";
     static String url = "jdbc:mysql://localhost/erp?useSSL=false";
     static Connection con;
